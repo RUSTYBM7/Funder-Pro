@@ -1,0 +1,160 @@
+Got it! So you have the Replit-built FunderPro clone already running, and you want to
+Do NOT rebuild from scratch. Edit only what is listed below. Keep everything else exactly as it is.
+
+═══ STEP 1 — REBRAND (find and replace across ALL files) ═══
+- Every instance of "FunderPro" → "Multixpro.ai"
+- Every instance of "Funder Pro" → "Multixpro.ai"
+- Every instance of "funderpro.com" in visible text → "multixpro.ai"
+- Every instance of "The Original Prop Firm" → "The Future of Decentralized Multi-Asset Investing"
+- Every instance of "prop firm" or "prop trading" → "multi-asset investment platform"
+- Every instance of "funded trader" or "funded account" → "investment account"
+- Every instance of "challenge" (where it refers to trading challenge) → "investment plan"
+- Every instance of "Prop" in navigation labels → remove or replace with appropriate label
+- Page <title> tags across all pages → update to "Multixpro.ai | Multixpro Holdings & Co."
+- Browser tab favicon alt text → "Multixpro.ai"
+- Footer legal line → "© 2025 Multixpro Holdings & Co. All Rights Reserved. Multixpro.ai is a registered trademark of the United States."
+- Footer disclaimer → "All investment activity involves risk. Past performance is not indicative of future results. Multixpro Holdings & Co. does not guarantee returns. Please consult a licensed financial advisor before making investment decisions."
+
+═══ STEP 3 — NAVIGATION EDIT ═══
+Update the existing navbar links to:
+- Keep existing structure but update labels to:
+  "How It Works" → keep
+  "Markets" → add as new dropdown containing: Crypto, Stocks, Gold, Real Estate
+  "FAQs" → keep
+  "About" → keep dropdown but add "Leadership" as a new item in the dropdown
+  "Affiliates" → rename to "Partners"
+- Update "Buy a Challenge" CTA button → "Start Investing"
+- Update "Login / Register" → keep as is
+- Update "Get Started" button → keep label, update and color
+
+═══ STEP 4 — HOMEPAGE HERO SECTION EDIT ═══
+- Main headline → "One Platform. Every Market. Fully Decentralized."
+- Sub-headline → "Invest in crypto, stocks, gold, and real estate on a single AI-powered platform trusted by investors across 40+ countries."
+- Bullet point list (left column) → replace with:
+  • Bitcoin, Ethereum & 50+ Cryptocurrencies
+  • NYSE, NASDAQ & Global Stock Markets
+  • Gold, Silver & Precious Metals
+  • Fractional Real Estate Investment
+- Bullet point list (right column) → replace with:
+  • Fully Decentralized Infrastructure
+  • AI-Powered Market Insights
+  • Bank-Grade Security
+  • 24/7 Global Markets
+- CTA buttons → "Start Investing" (primary) + "Explore Markets" (secondary)
+- Disclaimer text → "All investment activity involves risk. Multixpro Holdings & Co. is a registered trademark of the United States."
+- Keep the existing video background, layout, Trustpilot badge position, and platform logo strip — just swap the text
+
+═══ STEP 5 — ADD NEW ASSET CLASS SECTION ═══
+Insert a new section directly after the existing hero section (before whatever section currently follows it):
+
+<section id="asset-classes">
+  Headline: "Every Asset Class. One Account."
+  4 cards in a responsive grid:
+  
+  Card 1 — Cryptocurrency
+  Icon: Bitcoin/crypto SVG icon
+  Text: "Trade 50+ cryptocurrencies including BTC, ETH, SOL and more on a fully decentralized infrastructure."
+  Link: "#crypto"
+  
+  Card 2 — Stocks & Equities  
+  Icon: Chart/trending up SVG icon
+  Text: "Access NYSE, NASDAQ, LSE and global stock markets with fractional share investing and real-time data."
+  Link: "#stocks"
+  
+  Card 3 — Gold & Precious Metals
+  Icon: Gold bar SVG icon
+  Text: "Invest in gold-backed assets, silver, and platinum as a hedge against inflation and market volatility."
+  Link: "#gold"
+  
+  Card 4 — Real Estate
+  Icon: Building SVG icon
+  Text: "Own fractional shares of residential and commercial properties and earn passive rental income."
+  Link: "#realestate"
+
+  responsive 2x2 grid on mobile, 4-column on desktop.
+  Match the existing site's card style, color and spacing exactly.
+</section>
+
+═══ STEP 6 — EDIT EXISTING COMPARISON/FEATURES SECTION ═══
+Find the section that compares "Industry Average vs FunderPro" table:
+- Replace "FunderPro Pro Account" column header → "Multixpro.ai"
+- Replace all prop-trading specific row labels with investment platform equivalents:
+  "Rewards Frequency" → "Returns Frequency"
+  "First Reward Wait" → "First Withdrawal Wait"
+  "Reward Guarantee" → "Platform Guarantee"
+  "Risk of market manipulation" → "Platform Transparency"
+
+═══ STEP 7 — EDIT PRICING SECTION ═══
+Find the existing pricing/challenge table section:
+- Rename tab "Challenge" → "Investment Plans"
+- Rename tab "Instant Program" → "Instant Account"
+- Rename plan types:
+  "One Phase" → "Starter Plan"
+  "Classic" → "Classic Plan"  
+  "Pro" → "Pro Plan"
+- Replace "Buy Challenge" buttons → "Start Plan"
+- Replace "Go Instant" buttons → "Open Instant Account"
+- Replace "Phase 1 (demo trading)" column header → "Verification Phase"
+- Replace "Phase 2 (demo trading)" column header → "Growth Phase"
+- Replace "Funded Account" column header → "Live Account"
+- Replace "Profit Target" row label → "Return Target"
+- Replace "Profit Split" row label → "Earnings Split"
+- Replace "Challenge Duration" row label → "Plan Duration"
+- Replace "Reward Frequency" row label → "Withdrawal Frequency"
+- Replace "Challenge Leverage" row label → "Account Leverage"
+- Replace "Consistency Rule" row label → "Portfolio Rule"
+- Keep all existing numbers, percentages, and values exactly as they are
+
+═══ STEP 8 — EDIT FOOTER ═══
+- Replace FunderPro logo text → "Multixpro.ai"
+- Replace tagline → "The Future of Decentralized Multi-Asset Investing"
+- Add to existing footer nav columns a new link: "Leadership" under the About/Company column
+- Replace all "funderpro.com" href links with "#" placeholders
+- Keep all existing footer structure, color, columns, and styling
+
+═══ STEP 9 — ADD LEADERSHIP SECTION ═══
+Add a new section at the very bottom of index.html, directly above the footer:
+
+<section id="leadership">
+  
+  Headline: "Leadership"
+  Sub-headline: "The team driving the future of decentralized investing."
+  
+  Single prominent Managing Director card, centered:
+  
+  - Portrait: <img src="/assets/images/stephanie-diomin.jpg" alt="Stephanie Alvina Diomin">
+    Add a visible note in an HTML comment above this img tag:
+    <!-- ⚠️ CLIENT TO SUPPLY PORTRAIT: save file as stephanie-diomin.jpg in /assets/images/ -->
+    Show a styled placeholder box with text "Portrait Coming Soon" until image is supplied.
+  
+  - Name: Stephanie Alvina Diomin, CPWA®
+  - Title: Managing Director — Multixpro Holdings & Co.
+  - Bio: "Stephanie Alvina Diomin is a Certified Private Wealth Advisor (CPWA®) and licensed finance professional with extensive expertise in real estate and investment strategy. As Managing Director of Multixpro Holdings & Co., she oversees global investment operations and leads the firm's client growth and partnerships worldwide."
+  
+  - Social links row below bio:
+    📸 Instagram: @InvestWithDiomin → https://instagram.com/InvestWithDiomin
+    💼 LinkedIn: InvestWithDiomin → https://linkedin.com/in/InvestWithDiomin
+    🦋 Bluesky: @InvestWithDiomin → https://bsky.app/profile/InvestWithDiomin
+    💬 WhatsApp: +1 (805) 395-6873 → https://wa.me/18053956873
+  
+  Style: match existing site card style. Dark card background, gold accent border,
+  white text. Social links styled as icon+text pills with hover color effects.
+  Card max-width 480px, centered on page.
+
+  Also create a standalone /leadership/index.html page with:
+  - Same shared navbar and footer as all other pages
+  - This same leadership section as the main content
+  - Add a back link → "← Back to Home"
+
+</section>
+
+═══ STEP 10 — FINAL CHECK ═══
+After all edits verify:
+✅ "FunderPro" appears nowhere in any visible text across all pages
+✅ Asset class section displays correctly on mobile and desktop
+✅ Leadership section appears above footer on homepage
+✅ /leadership/ page exists and is internally linked from navbar About dropdown
+✅ All buttons updated to new labels
+✅ Footer legal text updated
+✅ No broken layouts — existing structure preserved everywhere else
+✅ Portrait placeholder clearly visible with the comment note for client to upload image
