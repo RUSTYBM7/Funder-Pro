@@ -1,0 +1,5 @@
+.elementor-15535 .elementor-element.elementor-element-be74358{--display:flex;border-style:none;--border-style:none;--padding-top:0px;--padding-bottom:0px;--padding-left:0px;--padding-right:0px;}.elementor-widget-image .widget-image-caption{color:var( --e-global-color-text );font-family:var( --e-global-typography-text-font-family ), Sans-serif;font-weight:var( --e-global-typography-text-font-weight );}#elementor-popup-modal-15535 .dialog-widget-content{animation-duration:0.5s;background-color:var( --e-global-color-primary );border-style:none;}#elementor-popup-modal-15535{background-color:rgba(0,0,0,.8);justify-content:center;align-items:center;pointer-events:all;}#elementor-popup-modal-15535 .dialog-message{width:500px;height:auto;padding:0px 0px 0px 0px;}#elementor-popup-modal-15535 .dialog-close-button{display:flex;font-size:25px;}#elementor-popup-modal-15535 .dialog-close-button i{color:var( --e-global-color-0fbe997 );}#elementor-popup-modal-15535 .dialog-close-button svg{fill:var( --e-global-color-0fbe997 );}/* Start custom CSS */#elementor-popup-modal-15535 .dialog-close-button {
+    box-shadow: none;
+    outline: none;
+    border: 0;
+}/* End custom CSS */

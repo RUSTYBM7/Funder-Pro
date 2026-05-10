@@ -1,0 +1,290 @@
+/* General Element Settings for FunderPro Icon */
+.elementor-panel .elementor-element .icon i.funderpro-icon::before {
+  display: none;
+}
+
+.elementor-panel .elementor-element .icon i.funderpro-icon::after {
+  width: 30px;
+  height: 30px;
+  content: "";
+  display: inline-block;
+  border-radius: 5px;
+  background: url("../images/funderpro-icon.png") no-repeat center center/cover;
+}
+
+.elementor-icons-manager__tab-link i.funderpro-icon {
+  width: 30px;
+  height: 30px;
+  content: "";
+  border-radius: 100%;
+  background: url("../images/funderpro-icon.png") no-repeat center center/cover;
+  display: inline-block;
+  position: relative;
+  top: 10px;
+  margin-right: 6px;
+}
+
+/* Marquee Widget CSS */
+    .block-marquee-wrapper {
+        overflow: visible;
+        position: relative;
+        margin: 80px 0;
+        width: 100%;
+    }
+    
+    .block-marquee {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+    }
+    
+    .block-marquee__track {
+        display: flex;
+        will-change: transform;
+    }
+
+    .block-marquee__item {
+        color: transparent;
+        -webkit-text-stroke: 1px #7f8bab;
+        paint-order: stroke fill;
+        display: flex;
+        flex: 0 0 auto;
+        margin-right: 20px;
+        white-space: nowrap;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        margin: 0 12px;
+        transition: all .2s;
+        width: auto !important;
+    }
+    
+    .block-marquee__item p {
+        margin: 0;
+        font-family: 'Gellix', sans-serif;
+        font-size: 60px;
+        font-weight: 700;
+        line-height: 84px;
+        letter-spacing: 2.4px;
+    }
+    
+    .block-marquee__item svg {
+        margin-top: -10px;
+        display: inline-block;
+    }
+    
+    .block-marquee__item:hover {
+        color: #e2f8ff;
+    }
+    
+    html[dir="rtl"] .block-marquee__item {
+        float: right;
+        margin-left: 12px;
+        margin-right: 0;
+        text-align: right;
+    }
+
+    /* RTL Support for Marquee */
+html[dir="rtl"] .block-marquee__item {
+    text-align: right;
+    margin-left: 20px;
+    margin-right: 0;
+}
+
+/* Ensure the direction of the marquee in RTL */
+html[dir="rtl"] .block-marquee__track {
+    flex-direction: row-reverse;
+}
+    
+    html[dir="ltr"] .block-marquee__item {
+        float: left;
+        margin-right: 12px;
+        margin-left: 0;
+        text-align: left;
+    }
+/* END Marquee Widget CSS */
+
+
+/* People Blocks Widget */
+html[dir="rtl"] .block-people_blocks__container--nav-prev {
+    right: 0;
+    left: auto;
+  }
+  
+  html[dir="rtl"] .block-people_blocks__container--nav-next {
+    left: 0;
+    right: auto;
+  }
+  
+  html[dir="rtl"] .block-people_blocks__container--nav-next svg,
+  html[dir="rtl"] .block-people_blocks__container--nav-prev svg {
+    transform: rotate(180deg);
+    /* Flip the arrow for RTL */
+  }
+
+/* Hover Effect for Marquee Items */
+.block-marquee__item:hover {
+  color: #e2f8ff;
+}
+
+/* RTL Support for Marquee */
+html[dir="rtl"] .block-marquee__item {
+  float: right;
+  margin-left: 12px;
+  margin-right: 0;
+  text-align: right;
+}
+
+/* LTR Support for Marquee */
+html[dir="ltr"] .block-marquee__item {
+  float: left;
+  margin-right: 12px;
+  margin-left: 0;
+  text-align: left;
+}
+
+/* Carousel Styling */
+.carousel-container {
+  margin: 0 16px;
+  position: relative;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.carousel-wrapper {
+  display: flex;
+  transition: transform .5s ease-in-out;
+  gap: 16px;
+}
+
+.carousel-slide {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 396px;
+  transition: transform .5s ease-in-out;
+  position: relative;
+  border-radius: 23px;
+  box-shadow: 0 0 53.3px 0 rgba(1, 167, 225, 0.20);
+  background: #0f1527;
+  overflow: hidden;
+}
+
+.certificate-image {
+  width: 100%;
+  height: auto;
+  border-radius: 23px;
+}
+
+/* RTL Support for Carousel */
+html[dir="rtl"] .carousel-wrapper {
+  direction: rtl;
+}
+
+html[dir="ltr"] .carousel-wrapper {
+  direction: ltr;
+}
+
+html[dir="ltr"] .carousel-slide {
+  float: left;
+  text-align: left;
+}
+
+html[dir="rtl"] .carousel-slide {
+  float: right;
+  text-align: right;
+}
+
+/* Carousel Buttons */
+.carousel-button {
+  position: absolute;
+  top: 110%;
+  transform: translateY(-50%);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prev {
+  left: 46%;
+}
+
+.next {
+  right: 42%;
+}
+
+/* Assuming the body has a direction: rtl; */
+body.rtl .block-standard_table__container--nav-prev i svg,
+body.rtl .block-standard_table__container--nav-next i svg {
+  transform: rotate(180deg);
+}
+
+body.rtl .block-product_table_mobile__container--prices-nav-next,
+body.rtl .block-product_table_mobile__container--prices-nav-prev {
+  transform: rotate(180deg);
+}
+
+.e-n-tabs-heading > :is( .e-n-tab-title > .e-n-tab-title-text, .e-n-tab-title)  {
+  padding-left: 0;
+}
+
+body.rtl .table-mob-row__title div {
+  max-width: 180px;
+  text-align: justify;
+}
+
+@media (min-width: 768px) {
+  .prev {
+    left: 48%;
+  }
+
+  body.rtl .e-n-tabs-heading > :is( .e-n-tab-title > .e-n-tab-title-text, .e-n-tab-title)  {
+    padding-right: 0;
+  }
+
+  .next {
+    right: 48%;
+  }
+
+  .carousel-container::after,
+  .carousel-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 450px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .carousel-container::before {
+    left: -230px;
+    background: linear-gradient(to right, #0f1527, rgba(15, 21, 39, 0));
+  }
+
+  .carousel-container::after {
+    right: -230px;
+    background: linear-gradient(to left, #0f1527, rgba(15, 21, 39, 0));
+  }
+
+  .carousel-container {
+    margin: 0 auto;
+    padding: 40px 25px;
+  }
+
+  .carousel-button {
+    top: 95%;
+  }
+}
+@media (min-width: 1920px) {
+  .carousel-container::after,
+  .carousel-container::before {
+    background: none;
+  }
+}
