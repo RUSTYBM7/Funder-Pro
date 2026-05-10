@@ -1,0 +1,127 @@
+You’re right — FunderPro is a multi-page site. Here’s the corrected prompt:
+
+REPLIT PROMPT — FunderPro.com EXACT Full Multi-Page Clone
+
+You are building a 100% exact, pixel-perfect clone of https://funderpro.com/ as a complete multi-page website — nothing more, nothing less.
+
+LIVE REFERENCE (MANDATORY): Before writing a single line of code, fetch and fully analyze every page of https://funderpro.com/ listed below. Read the HTML source, computed styles, layout, and all visible content of each page. Every decision must come from the live site only.
+
+═══ ABSOLUTE RULES — NON-NEGOTIABLE ═══
+❌ DO NOT add anything not on the live site
+❌ DO NOT remove or simplify anything that IS on the live site
+❌ DO NOT change any copy, headings, labels — exact words only
+❌ DO NOT substitute colors, fonts, spacing, or layout
+❌ DO NOT invent or guess any data — use only exact figures from live site
+❌ DO NOT use placeholder Lorem Ipsum anywhere
+❌ DO NOT simplify mobile — match live responsive behavior exactly
+❌ DO NOT combine pages that are separate on the live site
+If unsure about any element — re-fetch the live page. Never guess.
+
+═══ PROJECT STRUCTURE ═══
+Build as a standard multi-page website with the following file structure:
+
+/index.html                        ← Homepage
+/the-challenge/index.html
+/features/index.html
+/trading-rules/index.html
+/rewards/index.html
+/trading-platforms/index.html
+/products-and-spreads/index.html
+/tools-for-traders/index.html
+/economic-calendar/index.html
+/blog/index.html
+/become-a-funderpro-affiliate/index.html
+/about-us/index.html
+/careers/index.html
+/contact-us/index.html
+/prop-trading-technology/index.html
+/css/styles.css                    ← Global shared stylesheet
+/js/main.js                        ← Global shared JS
+/assets/                           ← Any locally needed assets
+
+═══ PAGES TO BUILD — FETCH AND CLONE EACH ONE ═══
+
+Fetch and clone every page exactly as it appears on the live site:
+
+1. https://funderpro.com/                          → index.html
+2. https://funderpro.com/the-challenge/            → /the-challenge/index.html
+3. https://funderpro.com/features/                 → /features/index.html
+4. https://funderpro.com/trading-rules/            → /trading-rules/index.html
+5. https://funderpro.com/rewards/                  → /rewards/index.html
+6. https://funderpro.com/trading-platforms/        → /trading-platforms/index.html
+7. https://funderpro.com/products-and-spreads/     → /products-and-spreads/index.html
+8. https://funderpro.com/tools-for-traders/        → /tools-for-traders/index.html
+9. https://funderpro.com/economic-calendar/        → /economic-calendar/index.html
+10. https://funderpro.com/blog/                    → /blog/index.html
+11. https://funderpro.com/become-a-funderpro-affiliate/ → /become-a-funderpro-affiliate/index.html
+12. https://funderpro.com/about-us/                → /about-us/index.html
+13. https://funderpro.com/careers/                 → /careers/index.html
+14. https://funderpro.com/contact-us/              → /contact-us/index.html
+15. https://funderpro.com/prop-trading-technology/ → /prop-trading-technology/index.html
+
+═══ SHARED COMPONENTS (same on every page) ═══
+
+STICKY NAVBAR — identical across all pages:
+- FunderPro logo (links to index.html)
+- Dropdown menus: How It Works, FAQs, Trading, Affiliates, About
+- All dropdown links point to the correct local page paths
+- "Login / Register" text link → https://prop.funderpro.com/login
+- Language switcher: EN / ES / IT / AR with flag SVGs
+- "Get Started" green CTA → https://prop.funderpro.com/signup
+- Mobile hamburger menu matching live behavior
+
+FOOTER — identical across all pages:
+- FunderPro logo
+- All navigation columns with correct internal links
+- Social media icons
+- Full legal disclaimer text (exact copy from live site)
+
+═══ HOMEPAGE (index.html) — FULL SECTION LIST ═══
+Clone every section exactly as listed in the live site:
+1. Hero (video background, headline, bullets, CTAs, Trustpilot, platform logos)
+2. Payout Certificates marquee strip (all 13 certificates)
+3. Two Paths section (challenge types, cards, images)
+4. Trader Testimonials (6-video grid)
+5. Pro-Trader Comparison table
+6. Daily Rewards section
+7. Full Pricing/Challenge table (all tabs, sub-tabs, account sizes, all rows, expandable conditions)
+8. Footer
+
+═══ ASSETS ═══
+- Load all images and SVGs directly from FunderPro's CDN URLs
+- Base: https://funderpro.com/wp-content/uploads/
+- Flags: https://funderpro.com/wp-content/uploads/flags/
+- Theme assets: https://funderpro.com/wp-content/themes/funderpro/images/
+- Hero video: https://funderpro.com/wp-content/uploads/2024/03/FunderPro-Hero-Video-V2.webm
+- Always check the live page source for exact asset filenames — never guess
+
+═══ INTERNAL LINKS ═══
+All internal navigation links must point to the correct local file paths (e.g. /the-challenge/, /features/) — not to funderpro.com. External links (Login, Register, Buy Challenge, Go Instant) keep their original https://prop.funderpro.com URLs.
+
+═══ INTERACTIONS — MATCH LIVE SITE EXACTLY ═══
+- Navbar dropdowns: hover desktop, tap mobile
+- Mobile hamburger menu
+- Homepage pricing table: all tabs, sub-tabs, account size selectors update dynamically
+- "Show More / Show Less" condition toggles
+- Certificate strip and video row auto-scroll/marquee
+- Smooth scroll on anchor links
+- All hover, active, focus states match live site
+
+═══ TECH ═══
+- Plain HTML, CSS, JS — no React, no Vue, no build tools
+- Shared styles in /css/styles.css, shared JS in /js/main.js
+- Works fully when opened locally in a browser or served from Replit
+- Responsive: 375px mobile, 768px tablet, 1440px desktop
+
+═══ FINAL QUALITY CHECK ═══
+Before finishing, verify:
+✅ All 15 pages are built and internally linked
+✅ Shared navbar and footer are identical across every page
+✅ Zero content added or removed vs live site
+✅ All copy verbatim — not paraphrased or shortened
+✅ All pricing data exactly matches live site
+✅ All colors, fonts, spacing match live site
+✅ All images load from correct CDN URLs
+✅ All interactions work as on live site
+✅ Fully responsive on mobile, tablet, desktop
+Fix anything that fails before delivering.
