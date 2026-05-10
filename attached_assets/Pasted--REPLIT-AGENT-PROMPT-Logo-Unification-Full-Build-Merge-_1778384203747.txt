@@ -1,0 +1,177 @@
+# REPLIT AGENT PROMPT — Logo Unification + Full Build Merge
+
+I am attaching my correct brand logo image to this message.  
+Call it [ATTACHED_LOGO].
+
+════════════════════════════════════
+TASK 1 — GLOBAL LOGO REPLACEMENT
+════════════════════════════════════
+
+Scan the ENTIRE project recursively.
+
+Find and replace EVERY existing logo instance across ALL pages and components with [ATTACHED_LOGO].
+
+This includes:
+
+- <img> tags using logo images
+- inline <svg> logos
+- CSS background-image logos
+- React/Vue/Svelte image imports
+- navbar logos
+- sidebar logos
+- footer logos
+- dashboard topbar logos
+- auth page logos
+- mobile menu logos
+- favicon/logo references where applicable
+
+Search all:
+- .html
+- .tsx
+- .jsx
+- .js
+- .ts
+- .css
+- .scss
+- .vue
+- .svelte
+
+Requirements:
+- Preserve existing container dimensions/layout
+- Use:
+  css   object-fit: contain;   
+  where needed
+- Ensure sharp rendering on retina/mobile
+- Ensure visibility on dark + light backgrounds
+- Maintain responsiveness on all breakpoints
+- Do NOT distort aspect ratio
+- Do NOT modify unrelated UI elements
+
+If old SVG logos exist:
+- completely remove them
+- replace with the attached logo image asset
+
+Centralize the logo asset path if possible:
+txt /assets/logo.png 
+
+Update all imports/references to use the centralized logo.
+
+════════════════════════════════════
+TASK 2 — MERGE BOTH BUILDS
+════════════════════════════════════
+
+Two builds already exist:
+
+- Build 1 → Marketing/Landing site
+- Build 2 → SaaS dashboard/app interface
+
+Connect them seamlessly.
+
+Routing requirements:
+
+ALL buttons labeled:
+- “Sign Up”
+- “Get Started”
+- “Start Free”
+- “Create Account”
+
+must redirect to:
+txt /build2/signup 
+
+ALL buttons labeled:
+- “Login”
+- “Sign In”
+
+must redirect to:
+txt /build2/login 
+
+After successful authentication:
+- signup → redirect dashboard
+- login → redirect dashboard
+
+Dashboard route:
+txt /build2/dashboard 
+
+Requirements:
+- Use proper relative/internal routing
+- Preserve SPA router compatibility
+- Prevent broken navigation
+- Ensure mobile nav links also work
+- Update CTA links in:
+  - navbar
+  - hero section
+  - pricing sections
+  - footer
+  - feature blocks
+  - sticky CTA banners
+  - mobile drawer menus
+
+════════════════════════════════════
+TASK 3 — LANDING PAGE UI POLISH
+════════════════════════════════════
+
+Upgrade ALL pricing cards, service cards, feature cards, and Stephanie section cards.
+
+Apply modern premium SaaS styling WITHOUT changing layout structure.
+
+Required styling:
+
+css border-radius: 16px; backdrop-filter: blur(10px); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); transition: all 0.3s ease; 
+
+Hover effect:
+css transform: translateY(-6px); box-shadow: 0 18px 45px rgba(0,0,0,0.18); 
+
+Featured/highlighted cards:
+- glowing accent border
+- subtle gradient glow
+- stronger hover elevation
+
+Spacing improvements:
+- balanced padding
+- cleaner vertical rhythm
+- aligned content heights
+- improved typography spacing
+
+Stephanie section:
+- match Build 1 visual language
+- same glassmorphism style
+- premium modern appearance
+- consistent gradients/colors/shadows
+
+You MAY slightly improve marketing copy ONLY if:
+- more uplifting
+- more premium sounding
+- clearer conversion messaging
+
+Do NOT:
+- remove sections
+- alter layout hierarchy
+- break responsiveness
+- remove animations already present
+
+════════════════════════════════════
+FINAL VALIDATION CHECKLIST
+════════════════════════════════════
+
+Verify ALL of the following:
+
+✅ Same logo appears on every page  
+✅ No old logos remain anywhere  
+✅ Sign Up/Get Started → Build 2 signup  
+✅ Login → Build 2 login  
+✅ Auth redirects correctly to dashboard  
+✅ Stephanie cards upgraded visually  
+✅ Feature/pricing/service cards have glassmorphism  
+✅ Hover effects work smoothly  
+✅ Mobile responsiveness preserved  
+✅ Desktop responsiveness preserved  
+✅ No console errors  
+✅ No broken routes  
+✅ No missing assets  
+✅ Nothing removed or broken  
+
+After completion:
+- run final build
+- fix all compile/runtime issues automatically
+- ensure production-ready state
+- commit all changes cleanly

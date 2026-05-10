@@ -1,0 +1,51 @@
+1
+
+
+pip install httrack 2>/dev/null; httrack "https://coinbase.com/" -O "./coinbase_clone" "+*.coinbase.com/*" -v --depth=3 --mirror --keep-alive --robots=0 --disable-security-limits -A999999 --max-rate=0
+If not seen you run this below
+
+
+wget --mirror --convert-links --adjust-extension --page-requisites --no-parent --no-check-certificate --user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" --wait=1 --limit-rate=500k -e robots=off -P ./coinbase_clone https://coinbase.com/
+
+Do NOT write any code from scratch. Do NOT use your imagination. Do NOT add or remove anything.
+
+Your only job is this:
+
+1. The folder ./funderpro_clone/ contains a fully scraped copy of https://funderpro.com/ — every HTML file, CSS file, JS file, image, font, and asset was downloaded directly from the live site.
+
+2. Fix all internal paths so the site works locally:
+   - All href, src, action, srcset, url() references must point to local relative paths
+   - Remove any absolute references to funderpro.com domains
+   - Fix any broken asset paths so images, fonts, CSS, and JS all load correctly
+   - Preserve every file exactly as scraped — do not rewrite, restyle, or restructure anything
+
+3. Make the site run on Replit:
+   - Create a simple server.js using Express (or a Python http.server) to serve the ./funderpro_clone/ folder as static files
+   - Set the entry point to the index.html inside ./funderpro_clone/
+   - Add a .replit file that runs the server automatically on port 3000
+
+4. Test that every page loads with correct styles, images, and scripts.
+
+Output only the path-fixing script and server setup. Touch nothing else.
+
+
+Work on on from the signup to all other inner pages full  implementation 
+
+https://www.coinbase.com/dashboard
+https://www.coinbase.com/home
+https://www.coinbase.com/assets
+https://www.coinbase.com/trade
+https://www.coinbase.com/advanced-trade
+https://www.coinbase.com/portfolio
+https://www.coinbase.com/settings
+https://www.coinbase.com/notifications
+https://www.coinbase.com/transfers
+https://www.coinbase.com/payment_methods
+https://www.coinbase.com/price
+https://www.coinbase.com/explore
+https://www.coinbase.com/learn
+https://www.coinbase.com/account
+https://www.coinbase.com/security
+https://www.coinbase.com/profile
+
+And as many more 

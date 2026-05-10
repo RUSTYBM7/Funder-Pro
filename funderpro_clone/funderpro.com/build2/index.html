@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multixpro.ai | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="/build2/app.css" />
+  <!-- Google Fonts: non-blocking -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" /></noscript>
+</head>
+<body>
+  <div id="app">
+    <div class="splash">
+      <div class="splash-inner">
+        <div class="splash-logo">Multixpro<span>.ai</span></div>
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Auto-login for demo/preview path -->
+  <script>
+    (function(){
+      var p = location.pathname;
+      if (p.endsWith('/demo') || location.search.indexOf('demo=1') > -1) {
+        localStorage.setItem('mx_auth','1');
+        localStorage.setItem('mx_user', JSON.stringify({email:'demo@multixpro.ai',name:'Demo Investor'}));
+        history.replaceState({},'','/build2/dashboard');
+      }
+    })();
+  </script>
+  <!-- Chart.js served locally — no CDN blocking -->
+  <script src="/build2/chart.min.js"></script>
+  <script src="/build2/app.js"></script>
+</body>
+</html>

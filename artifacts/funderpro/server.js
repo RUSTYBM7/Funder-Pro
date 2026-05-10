@@ -51,6 +51,12 @@ async function proxyFromOrigin(req, res) {
 app.get("*", async (req, res) => {
   const reqPath = req.path;
 
+  // ── Build2 SPA fallback — /build2/* → /build2/index.html ────────────────
+  if (reqPath.startsWith('/build2') && !reqPath.match(/\.(js|css|png|jpg|jpeg|svg|webp|woff2?|ttf|ico|json)$/i)) {
+    const spaIndex = join(STATIC_ROOT, 'build2', 'index.html');
+    if (existsSync(spaIndex)) return res.sendFile(spaIndex);
+  }
+
   // ── Webpack lazy chunk stub ──────────────────────────────────────────────
   // Matches paths like .../build/js/5461-ae4cb310f53471a2e555.js
   const chunkMatch = reqPath.match(/\/build\/js\/(\d+)-[a-f0-9]+\.js$/);
