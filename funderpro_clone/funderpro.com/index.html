@@ -542,6 +542,55 @@ document.addEventListener("DOMContentLoaded", function() {
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MS436J9"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+<!-- ═══ Multixpro.ai Live Price Ticker ═══ -->
+<style>
+#mx-ticker-bar{position:fixed;top:0;left:0;right:0;z-index:99999;height:36px;background:rgba(7,9,20,0.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,226,122,0.18);overflow:hidden;display:flex;align-items:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;}
+#mx-ticker-label{flex-shrink:0;padding:0 14px;font-size:10px;font-weight:800;color:#00e27a;letter-spacing:.12em;text-transform:uppercase;border-right:1px solid rgba(255,255,255,0.07);white-space:nowrap;display:flex;align-items:center;gap:6px;}
+#mx-ticker-label::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#00e27a;animation:mx-blink 1.4s ease-in-out infinite;}
+@keyframes mx-blink{0%,100%{opacity:1}50%{opacity:.3}}
+#mx-ticker-viewport{flex:1;overflow:hidden;height:100%;position:relative;}
+#mx-ticker-track{display:flex;align-items:center;white-space:nowrap;position:absolute;height:100%;animation:mx-scroll 44s linear infinite;}
+#mx-ticker-track:hover{animation-play-state:paused;}
+@keyframes mx-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.mx-coin{display:inline-flex;align-items:center;gap:6px;padding:0 22px;height:100%;border-right:1px solid rgba(255,255,255,0.05);cursor:pointer;transition:background .2s;}
+.mx-coin:hover{background:rgba(255,255,255,0.03);}
+.mx-coin-sym{color:rgba(255,255,255,.55);font-size:11px;font-weight:600;letter-spacing:.03em;}
+.mx-coin-price{color:#fff;font-size:12px;font-weight:700;}
+.mx-coin-chg{font-size:11px;font-weight:700;}
+.mx-coin-chg.up{color:#00e27a;}
+.mx-coin-chg.down{color:#f75555;}
+body.home{padding-top:36px!important;}
+@media(max-width:600px){#mx-ticker-bar{height:30px;}body.home{padding-top:30px!important;}}
+</style>
+<div id="mx-ticker-bar">
+  <div id="mx-ticker-label">Live</div>
+  <div id="mx-ticker-viewport"><div id="mx-ticker-track"></div></div>
+</div>
+<script>
+(function(){
+  var coins=[
+    {sym:'BTC', price:94512.40, chg:2.34},
+    {sym:'ETH', price:3421.80,  chg:1.82},
+    {sym:'SOL', price:198.40,   chg:4.21},
+    {sym:'XRP', price:2.4100,   chg:3.12},
+    {sym:'BNB', price:412.30,   chg:-0.84},
+    {sym:'DOGE',price:0.18520,  chg:1.24},
+    {sym:'ADA', price:0.78400,  chg:-1.42},
+    {sym:'AVAX',price:38.920,   chg:5.61},
+    {sym:'DOT', price:7.8400,   chg:-2.10},
+    {sym:'LINK',price:18.720,   chg:3.40},
+    {sym:'POL', price:0.48200,  chg:-0.92},
+    {sym:'USDC',price:1.0000,   chg:0.01},
+  ];
+  function fP(n){return n>=1000?'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):n>=1?'$'+n.toFixed(4):'$'+n.toFixed(6);}
+  function build(list){return list.map(function(c){var s=c.chg>=0?'+':'-',a=Math.abs(c.chg).toFixed(2),cls=c.chg>=0?'up':'down';return '<span class="mx-coin" onclick="location.href=\'/build2/price\'">'+'<span class="mx-coin-sym">'+c.sym+'</span><span class="mx-coin-price">'+fP(c.price)+'</span><span class="mx-coin-chg '+cls+'">'+s+a+'%</span></span>';}).join('');}
+  function refresh(){var tr=document.getElementById('mx-ticker-track');if(!tr)return;var h=build(coins);tr.innerHTML=h+h;}
+  refresh();
+  setInterval(function(){coins=coins.map(function(c){var j=(Math.random()-.5)*.003*c.price,cj=(Math.random()-.5)*.08;return{sym:c.sym,price:Math.max(c.price+j,.0001),chg:+(c.chg+cj).toFixed(2)};});refresh();},3500);
+})();
+</script>
+<!-- ═══ End Ticker ═══ -->
+
 <script type="rocketlazyloadscript">
 jQuery(document).ready(function(){
     var form = jQuery('#gform_16, #gform_17, #gform_19, #gform_4'); // Replace 1 with your form ID
