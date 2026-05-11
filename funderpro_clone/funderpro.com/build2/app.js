@@ -1253,6 +1253,237 @@ Router.register('*',                () => Router.navigate(Auth.isLoggedIn()?'/da
 // Boot
 Router.init();
 
+// ═══════════════════════════════════════════════════════════════
+// GROQ AI CHAT WIDGET
+// ═══════════════════════════════════════════════════════════════
+
+const MXChat = (() => {
+  const SUGGESTIONS = [
+    'How is BTC performing?',
+    'Explain DeFi simply',
+    'Best crypto for beginners?',
+    'How do I diversify my portfolio?',
+    'What is SOL used for?',
+  ];
+
+  let messages = [];
+  let isOpen = false;
+  let isStreaming = false;
+
+  function initWidget() {
+    if (document.getElementById('mx-ai-btn')) return;
+
+    // Floating button
+    const btn = document.createElement('div');
+    btn.id = 'mx-ai-btn';
+    btn.innerHTML = `
+      <div id="mx-ai-badge">AI</div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+        <path d="M8 12h.01M12 12h.01M16 12h.01" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>`;
+    document.body.appendChild(btn);
+
+    // Panel
+    const panel = document.createElement('div');
+    panel.id = 'mx-ai-panel';
+    panel.innerHTML = `
+      <div class="mx-ai-header">
+        <div class="mx-ai-avatar">MX</div>
+        <div class="mx-ai-header-info">
+          <div class="mx-ai-header-name">MX Assistant</div>
+          <div class="mx-ai-header-status">Online · Groq AI</div>
+        </div>
+        <button class="mx-ai-close" id="mx-ai-close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="mx-ai-messages" id="mx-ai-messages"></div>
+      <div class="mx-ai-suggestions" id="mx-ai-suggestions"></div>
+      <div class="mx-ai-input-row">
+        <input id="mx-ai-input" placeholder="Ask about markets, crypto, trading…" autocomplete="off" />
+        <button id="mx-ai-send">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"/>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>`;
+    document.body.appendChild(panel);
+
+    // Events
+    btn.addEventListener('click', toggle);
+    document.getElementById('mx-ai-close').addEventListener('click', close);
+    document.getElementById('mx-ai-send').addEventListener('click', sendMessage);
+    document.getElementById('mx-ai-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+
+    renderSuggestions();
+    addMessage('ai', 'Hi! I\'m MX, your AI financial assistant powered by Groq. I can help you with market insights, trading strategies, portfolio analysis, and navigating Multixpro.ai. What would you like to know?');
+  }
+
+  function toggle() {
+    isOpen ? close() : open();
+  }
+
+  function open() {
+    isOpen = true;
+    document.getElementById('mx-ai-panel').classList.add('open');
+    document.getElementById('mx-ai-badge').style.display = 'none';
+    setTimeout(() => document.getElementById('mx-ai-input')?.focus(), 200);
+  }
+
+  function close() {
+    isOpen = false;
+    document.getElementById('mx-ai-panel').classList.remove('open');
+  }
+
+  function renderSuggestions() {
+    const el = document.getElementById('mx-ai-suggestions');
+    if (!el) return;
+    el.innerHTML = SUGGESTIONS.map(s =>
+      `<span class="mx-ai-chip" data-q="${s}">${s}</span>`
+    ).join('');
+    el.querySelectorAll('.mx-ai-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.getElementById('mx-ai-input').value = chip.dataset.q;
+        sendMessage();
+      });
+    });
+  }
+
+  function addMessage(role, text) {
+    const msgsEl = document.getElementById('mx-ai-messages');
+    if (!msgsEl) return null;
+    const user = Auth.getUser();
+    const initials = (user.name || 'U').substring(0, 2).toUpperCase();
+    const id = 'mx-msg-' + Date.now() + Math.random().toString(36).slice(2);
+    const div = document.createElement('div');
+    div.className = `mx-msg ${role}`;
+    div.id = id;
+    div.innerHTML = `
+      <div class="mx-msg-avatar">${role === 'ai' ? 'MX' : initials}</div>
+      <div class="mx-msg-bubble">${escapeHtml(text)}</div>`;
+    msgsEl.appendChild(div);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    messages.push({ role: role === 'ai' ? 'assistant' : 'user', content: text });
+    return id;
+  }
+
+  function showTyping() {
+    const msgsEl = document.getElementById('mx-ai-messages');
+    if (!msgsEl) return null;
+    const id = 'mx-typing-' + Date.now();
+    const div = document.createElement('div');
+    div.className = 'mx-msg ai';
+    div.id = id;
+    div.innerHTML = `
+      <div class="mx-msg-avatar">MX</div>
+      <div class="mx-ai-typing"><span></span><span></span><span></span></div>`;
+    msgsEl.appendChild(div);
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    return id;
+  }
+
+  async function sendMessage() {
+    if (isStreaming) return;
+    const input = document.getElementById('mx-ai-input');
+    const sendBtn = document.getElementById('mx-ai-send');
+    const text = input.value.trim();
+    if (!text) return;
+
+    input.value = '';
+    document.getElementById('mx-ai-suggestions').style.display = 'none';
+    addMessage('user', text);
+
+    isStreaming = true;
+    if (sendBtn) sendBtn.disabled = true;
+
+    const typingId = showTyping();
+    const msgsEl = document.getElementById('mx-ai-messages');
+
+    try {
+      const apiMessages = messages.slice(-12).map(m => ({ role: m.role, content: m.content }));
+
+      const res = await fetch('/mx-chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: apiMessages }),
+      });
+
+      if (!res.ok) throw new Error('API error ' + res.status);
+
+      // Remove typing indicator, add streaming bubble
+      document.getElementById(typingId)?.remove();
+
+      const user = Auth.getUser();
+      const initials = (user.name || 'U').substring(0, 2).toUpperCase();
+      const streamId = 'mx-stream-' + Date.now();
+      const streamDiv = document.createElement('div');
+      streamDiv.className = 'mx-msg ai';
+      streamDiv.id = streamId;
+      streamDiv.innerHTML = `
+        <div class="mx-msg-avatar">MX</div>
+        <div class="mx-msg-bubble" id="${streamId}-text"></div>`;
+      msgsEl.appendChild(streamDiv);
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let fullText = '';
+      const bubbleEl = document.getElementById(streamId + '-text');
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        for (const line of chunk.split('\n')) {
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6).trim();
+          if (!data || data === '[DONE]') continue;
+          try {
+            const parsed = JSON.parse(data);
+            if (parsed.done) break;
+            if (parsed.error) { fullText = 'Sorry, I ran into an issue. Please try again.'; break; }
+            if (parsed.content) {
+              fullText += parsed.content;
+              if (bubbleEl) bubbleEl.textContent = fullText;
+              msgsEl.scrollTop = msgsEl.scrollHeight;
+            }
+          } catch (_) {}
+        }
+      }
+
+      messages.push({ role: 'assistant', content: fullText });
+
+    } catch (err) {
+      document.getElementById(typingId)?.remove();
+      addMessage('ai', 'Sorry, I couldn\'t connect to the AI service right now. Please try again in a moment.');
+      console.error('MX Chat error:', err);
+    } finally {
+      isStreaming = false;
+      if (sendBtn) sendBtn.disabled = false;
+    }
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  return { init: initWidget, open, close, toggle };
+})();
+
+// Mount chat widget after every page render (only in authenticated views)
+const _origRender = render;
+function render(html) {
+  _origRender(html);
+  if (Auth.isLoggedIn()) {
+    requestAnimationFrame(() => MXChat.init());
+  }
+}
+
 // ─── Demo auto-login route ────────────────────────────────────────────────────
 Router.register('/demo', () => {
   Auth.login('demo@multixpro.ai', 'Demo Investor');
