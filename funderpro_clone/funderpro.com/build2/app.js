@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
-   Multixpro.ai Dashboard SPA — app.js
+   MultiFunderPro Dashboard SPA — app.js
+   Nova design system · oklch neutral · DM Sans · Groq AI
    Covers: Login, Signup, Dashboard, Assets, Trade, Advanced Trade,
    Portfolio, Settings, Notifications, Transfers, Payment Methods,
    Price, Explore, Learn, Profile, Security, Account
@@ -157,7 +158,7 @@ function buildLayout(title, content) {
     <div class="overlay" id="overlay"></div>
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <div class="sidebar-logo">Multixpro<span>.ai</span></div>
+        <div class="sidebar-logo">MultiFunder<span>Pro</span></div>
       </div>
       <nav class="sidebar-nav">
         <div class="nav-section-label">Overview</div>
@@ -220,6 +221,21 @@ function render(html) {
   bindCommonEvents();
 }
 
+// ─── Toast Notifications ──────────────────────────────────────────────────────
+function showToast(msg, type = 'success') {
+  let container = document.getElementById('mx-toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'mx-toast-container';
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement('div');
+  toast.className = `mx-toast ${type}`;
+  toast.textContent = msg;
+  container.appendChild(toast);
+  setTimeout(() => toast.remove(), 2600);
+}
+
 function bindCommonEvents() {
   // Nav items
   document.querySelectorAll('[data-route]').forEach(el => {
@@ -250,6 +266,20 @@ function bindCommonEvents() {
   document.querySelectorAll('.toggle').forEach(t => {
     t.addEventListener('click', () => t.classList.toggle('on'));
   });
+  // Search bar — filter watchlist/table rows if any
+  const searchInput = document.querySelector('.topbar-search input');
+  if (searchInput) {
+    searchInput.addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.asset-table tbody tr, .watchlist-item, .price-card').forEach(row => {
+        row.style.display = (!q || row.textContent.toLowerCase().includes(q)) ? '' : 'none';
+      });
+    });
+  }
+  // Mount MX AI chat widget on authenticated pages
+  if (Auth.isLoggedIn()) {
+    requestAnimationFrame(() => MXChat.init());
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -261,7 +291,7 @@ function pageLogin() {
   render(`
   <div class="auth-page">
     <div class="auth-card">
-      <div class="auth-logo">Multixpro<span>.ai</span></div>
+      <div class="auth-logo">MultiFunder<span>Pro</span></div>
       <div class="auth-subtitle">The Future of Decentralized Multi-Asset Investing</div>
       <h2>Sign in to your account</h2>
       <div class="form-group">
@@ -285,12 +315,12 @@ function pageLogin() {
   </div>`);
 
   document.getElementById('login-btn').addEventListener('click', () => {
-    const email = document.getElementById('login-email').value.trim() || 'investor@multixpro.ai';
+    const email = document.getElementById('login-email').value.trim() || 'investor@multifunderpro.ai';
     Auth.login(email);
     Router.navigate('/dashboard');
   });
   document.getElementById('go-signup').addEventListener('click', e => { e.preventDefault(); Router.navigate('/signup'); });
-  document.getElementById('google-btn').addEventListener('click', () => { Auth.login('investor@multixpro.ai', 'Investor'); Router.navigate('/dashboard'); });
+  document.getElementById('google-btn').addEventListener('click', () => { Auth.login('investor@multifunderpro.ai', 'Investor'); Router.navigate('/dashboard'); });
   document.getElementById('login-email').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('login-btn').click(); });
   document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('login-btn').click(); });
 }
@@ -300,7 +330,7 @@ function pageSignup() {
   render(`
   <div class="auth-page">
     <div class="auth-card">
-      <div class="auth-logo">Multixpro<span>.ai</span></div>
+      <div class="auth-logo">MultiFunder<span>Pro</span></div>
       <div class="auth-subtitle">Join 2.4M+ investors worldwide</div>
       <h2>Create your account</h2>
       <div class="form-group">
@@ -332,12 +362,12 @@ function pageSignup() {
 
   document.getElementById('signup-btn').addEventListener('click', () => {
     const name = document.getElementById('signup-name').value.trim() || 'Investor';
-    const email = document.getElementById('signup-email').value.trim() || 'investor@multixpro.ai';
+    const email = document.getElementById('signup-email').value.trim() || 'investor@multifunderpro.ai';
     Auth.login(email, name);
     Router.navigate('/dashboard');
   });
   document.getElementById('go-login').addEventListener('click', e => { e.preventDefault(); Router.navigate('/login'); });
-  document.getElementById('google-signup').addEventListener('click', () => { Auth.login('investor@multixpro.ai','Investor'); Router.navigate('/dashboard'); });
+  document.getElementById('google-signup').addEventListener('click', () => { Auth.login('investor@multifunderpro.ai','Investor'); Router.navigate('/dashboard'); });
 }
 
 // ─── Dashboard ────────────────────────────────────────────────────────────────
@@ -601,7 +631,7 @@ function pageTrade() {
           <div class="order-row"><span class="label fw-600">Total</span><span class="val" id="order-total" style="color:var(--brand)">—</span></div>
         </div>
         <button class="trade-btn buy-btn" id="exec-trade">Buy Now</button>
-        <p style="font-size:12px;color:var(--text2);text-align:center;margin-top:12px">All transactions are processed securely via Multixpro Holdings &amp; Co.</p>
+        <p style="font-size:12px;color:var(--text2);text-align:center;margin-top:12px">All transactions are processed securely via MultiFunderPro Holdings &amp; Co.</p>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:16px">
@@ -832,7 +862,7 @@ function pageNotifications() {
   const content = `
   <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
     <div><h1>Notifications</h1><p>Stay updated on your activity.</p></div>
-    <button class="btn-sm">Mark all read</button>
+    <button class="btn-sm" id="mark-all-read-btn">Mark all read</button>
   </div>
   <div class="transfer-tabs">
     <div class="tab-pill active">All</div>
@@ -840,13 +870,18 @@ function pageNotifications() {
     <div class="tab-pill">Price Alerts</div>
     <div class="tab-pill">Trades</div>
   </div>
-  <div class="card card-pad">${html}</div>`;
+  <div class="card card-pad" id="notif-list">${html}</div>`;
 
   render(buildLayout('Notifications', content));
   document.querySelectorAll('.tab-pill').forEach(p => p.addEventListener('click', ()=>{
     document.querySelectorAll('.tab-pill').forEach(x=>x.classList.remove('active'));
     p.classList.add('active');
   }));
+  document.getElementById('mark-all-read-btn')?.addEventListener('click', () => {
+    document.querySelectorAll('.notif-unread').forEach(el => el.classList.remove('notif-unread'));
+    showToast('All notifications marked as read');
+    document.getElementById('mark-all-read-btn').textContent = 'All read';
+  });
 }
 
 // ─── Transfers ────────────────────────────────────────────────────────────────
@@ -899,6 +934,11 @@ function pageTransfers() {
     document.querySelectorAll('.tab-pill').forEach(x=>x.classList.remove('active'));
     p.classList.add('active');
   }));
+  const [sendBtn, receiveBtn, depositBtn, withdrawBtn] = document.querySelectorAll('.qa-btn');
+  sendBtn?.addEventListener('click', () => showToast('Send flow coming soon — connect your wallet to send.'));
+  receiveBtn?.addEventListener('click', () => { navigator.clipboard?.writeText('0x1a2b3c4d5e6f7a8b9c0d'); showToast('Wallet address copied to clipboard'); });
+  depositBtn?.addEventListener('click', () => showToast('Deposit: link a bank account under Payment Methods.'));
+  withdrawBtn?.addEventListener('click', () => showToast('Withdrawal request submitted — arrives in 1–3 business days.'));
 }
 
 // ─── Payment Methods ──────────────────────────────────────────────────────────
@@ -906,7 +946,7 @@ function pagePaymentMethods() {
   const methods = [
     { icon:'🏦', name:'Chase Bank ····4829', sub:'Checking · Verified', badge:'Primary', badgeColor:'var(--brand)' },
     { icon:'💳', name:'Visa ····3871', sub:'Credit Card · Verified', badge:'', badgeColor:'' },
-    { icon:'🏛', name:'PayPal', sub:'investor@multixpro.ai · Connected', badge:'', badgeColor:'' },
+    { icon:'🏛', name:'PayPal', sub:'investor@multifunderpro.ai · Connected', badge:'', badgeColor:'' },
   ];
 
   const content = `
@@ -932,6 +972,13 @@ function pagePaymentMethods() {
   </div>`;
 
   render(buildLayout('Payment Methods', content));
+  document.querySelectorAll('.btn-sm:not(.danger)').forEach(btn => {
+    btn.addEventListener('click', () => showToast('Payment method details are currently read-only. Contact support to modify.'));
+  });
+  document.querySelectorAll('.btn-sm.danger').forEach(btn => {
+    btn.addEventListener('click', () => showToast('Payment method removed.', 'info'));
+  });
+  document.querySelector('.btn-primary')?.addEventListener('click', () => showToast('Redirecting to bank linking — coming soon.'));
 }
 
 // ─── Price ────────────────────────────────────────────────────────────────────
@@ -973,7 +1020,7 @@ function pageExplore() {
     { bg:'linear-gradient(135deg,#F7931A22,#F7931A08)', icon:'₿', tag:'Hot', title:'Bitcoin Halving 2024 Impact', body:'How the most recent BTC halving is shaping long-term price trajectories.' },
     { bg:'linear-gradient(135deg,#9945FF22,#9945FF08)', icon:'◎', tag:'DeFi', title:'Solana DeFi Ecosystem', body:"Explore lending, staking, and yield opportunities on Solana's blazing-fast chain." },
     { bg:'linear-gradient(135deg,#00AAE422,#00AAE408)', icon:'⚡', tag:'New', title:'Layer 2 Deep Dive', body:'Understanding Ethereum L2 solutions and how they reduce fees by 100x.' },
-    { bg:'linear-gradient(135deg,#00D39522,#00D39508)', icon:'🏦', tag:'Earn', title:'Staking Rewards Guide', body:'Earn up to 12% APY by staking your idle crypto assets through Multixpro.' },
+    { bg:'linear-gradient(135deg,#00D39522,#00D39508)', icon:'🏦', tag:'Earn', title:'Staking Rewards Guide', body:'Earn up to 12% APY by staking your idle crypto assets through MultiFunderPro.' },
     { bg:'linear-gradient(135deg,#4f8ef722,#4f8ef708)', icon:'📊', tag:'Analysis', title:'Altseason Indicators', body:'Key on-chain signals that have historically predicted major altcoin rallies.' },
     { bg:'linear-gradient(135deg,#F3BA2F22,#F3BA2F08)', icon:'🔮', tag:'AI', title:'AI in Crypto Trading', body:'How machine learning is transforming quantitative trading strategies in 2026.' },
   ];
@@ -1055,14 +1102,14 @@ function pageProfile() {
         <div class="profile-avatar">${(user.name||'U').substring(0,2).toUpperCase()}</div>
         <div class="profile-info">
           <h2>${user.name||'Investor'}</h2>
-          <p>${user.email||'investor@multixpro.ai'}</p>
+          <p>${user.email||'investor@multifunderpro.ai'}</p>
           <div class="kyc-badge">${I.check} KYC Verified</div>
         </div>
-        <button class="btn-sm" style="margin-left:auto;align-self:flex-start">Edit</button>
+        <button class="btn-sm" id="profile-edit-btn" style="margin-left:auto;align-self:flex-start">Edit</button>
       </div>
       <div class="divider"></div>
       <div class="settings-row"><div><div class="s-label">Full Name</div></div><div style="font-size:14px;color:var(--text2)">${user.name||'Investor'}</div></div>
-      <div class="settings-row"><div><div class="s-label">Email</div></div><div style="font-size:14px;color:var(--text2)">${user.email||'investor@multixpro.ai'}</div></div>
+      <div class="settings-row"><div><div class="s-label">Email</div></div><div style="font-size:14px;color:var(--text2)">${user.email||'investor@multifunderpro.ai'}</div></div>
       <div class="settings-row"><div><div class="s-label">Phone</div></div><div style="font-size:14px;color:var(--text2)">+1 (805) 395-6873</div></div>
       <div class="settings-row"><div><div class="s-label">Country</div></div><div style="font-size:14px;color:var(--text2)">United States</div></div>
       <div class="settings-row"><div><div class="s-label">Member since</div></div><div style="font-size:14px;color:var(--text2)">January 2025</div></div>
@@ -1071,13 +1118,21 @@ function pageProfile() {
       <h3 style="margin-bottom:16px">Referral Program</h3>
       <p style="color:var(--text2);font-size:13px;margin-bottom:16px">Invite friends and earn $10 per referral. Your unique link:</p>
       <div style="display:flex;gap:8px">
-        <div style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text2);font-family:monospace">multixpro.ai/ref/INV-28410</div>
-        <button class="btn-sm">${I.copy} Copy</button>
+        <div style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--text2);font-family:monospace" id="ref-link">multifunderpro.ai/ref/INV-28410</div>
+        <button class="btn-sm" id="copy-ref-btn">${I.copy} Copy</button>
       </div>
       <p style="margin-top:12px;font-size:13px;color:var(--brand);font-weight:600">0 referrals · $0 earned</p>
     </div>
   </div>`;
   render(buildLayout('Profile', content));
+
+  document.getElementById('profile-edit-btn')?.addEventListener('click', () => {
+    showToast('Profile editing coming soon. Contact support to update your details.');
+  });
+  document.getElementById('copy-ref-btn')?.addEventListener('click', () => {
+    const link = document.getElementById('ref-link')?.textContent || 'multifunderpro.ai/ref/INV-28410';
+    navigator.clipboard?.writeText(link).then(() => showToast('Referral link copied!')).catch(() => showToast('Copied: ' + link));
+  });
 }
 
 // ─── Security ─────────────────────────────────────────────────────────────────
@@ -1108,7 +1163,7 @@ function pageSecurity() {
       <h3 style="margin-bottom:16px">Active Sessions</h3>
       ${[
         { icon:'💻', name:'Chrome · macOS', loc:'New York, US', time:'Current session', current:true },
-        { icon:'📱', name:'Multixpro App · iPhone', loc:'New York, US', time:'2 hours ago', current:false },
+        { icon:'📱', name:'MultiFunderPro App · iPhone', loc:'New York, US', time:'2 hours ago', current:false },
       ].map(s=>`
         <div class="settings-row">
           <div style="display:flex;align-items:center;gap:12px">
@@ -1125,6 +1180,15 @@ function pageSecurity() {
     </div>
   </div>`;
   render(buildLayout('Security', content));
+  document.querySelectorAll('.btn-sm:not(.danger)').forEach(btn => {
+    btn.addEventListener('click', () => showToast('A verification code has been sent to your registered number.'));
+  });
+  document.querySelectorAll('.btn-sm.danger').forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      if (i === 0) showToast('Session revoked successfully.', 'info');
+      else showToast('Account closure requires contacting support@multifunderpro.ai', 'info');
+    });
+  });
 }
 
 // ─── Settings ─────────────────────────────────────────────────────────────────
@@ -1182,14 +1246,14 @@ function pageSettings() {
 function pageAccount() {
   const user = Auth.getUser();
   const content = `
-  <div class="page-header"><h1>Account</h1><p>Manage your Multixpro.ai account.</p></div>
+  <div class="page-header"><h1>Account</h1><p>Manage your MultiFunderPro account.</p></div>
   <div style="max-width:680px;display:flex;flex-direction:column;gap:16px">
     <div class="card card-pad">
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
         <div class="profile-avatar" style="width:56px;height:56px;font-size:18px">${(user.name||'U').substring(0,2).toUpperCase()}</div>
         <div>
           <div style="font-size:18px;font-weight:700">${user.name||'Investor'}</div>
-          <div style="font-size:13px;color:var(--text2)">${user.email||'investor@multixpro.ai'}</div>
+          <div style="font-size:13px;color:var(--text2)">${user.email||'investor@multifunderpro.ai'}</div>
           <div class="kyc-badge" style="margin-top:6px">${I.check} Level 2 Verified</div>
         </div>
       </div>
@@ -1220,6 +1284,11 @@ function pageAccount() {
     </div>
   </div>`;
   render(buildLayout('Account', content));
+  document.querySelector('[class="btn-sm"]')?.addEventListener('click', () => showToast('Uploading declaration — our team will review within 48 hours.'));
+  document.querySelectorAll('.btn-sm').forEach(btn => {
+    if (btn.textContent.trim() === 'Complete') btn.addEventListener('click', () => showToast('Accredited Investor declaration submitted for review.'));
+    if (btn.textContent.trim() === 'Connect') btn.addEventListener('click', () => showToast('Apple ID connection initiated — check your email.'));
+  });
 }
 
 // ─── Home (alias → Dashboard) ────────────────────────────────────────────────
@@ -1322,7 +1391,7 @@ const MXChat = (() => {
     });
 
     renderSuggestions();
-    addMessage('ai', 'Hi! I\'m MX, your AI financial assistant powered by Groq. I can help you with market insights, trading strategies, portfolio analysis, and navigating Multixpro.ai. What would you like to know?');
+    addMessage('ai', 'Hi! I\'m MX, your AI financial assistant powered by Groq. I can help you with market insights, trading strategies, portfolio analysis, and navigating MultiFunderPro. What would you like to know?');
   }
 
   function toggle() {
@@ -1475,17 +1544,10 @@ const MXChat = (() => {
   return { init: initWidget, open, close, toggle };
 })();
 
-// Mount chat widget after every page render (only in authenticated views)
-const _origRender = render;
-function render(html) {
-  _origRender(html);
-  if (Auth.isLoggedIn()) {
-    requestAnimationFrame(() => MXChat.init());
-  }
-}
+// MXChat.init() is called in bindCommonEvents for all authenticated pages
 
 // ─── Demo auto-login route ────────────────────────────────────────────────────
 Router.register('/demo', () => {
-  Auth.login('demo@multixpro.ai', 'Demo Investor');
+  Auth.login('demo@multifunderpro.ai', 'Demo Investor');
   Router.navigate('/dashboard');
 });

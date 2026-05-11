@@ -185,5 +185,5 @@ app.get("*", async (req, res) => {
 });
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Multixpro.ai server → http://0.0.0.0:${PORT}`);
+  console.log(`MultiFunderPro server → http://0.0.0.0:${PORT}`);
 });
