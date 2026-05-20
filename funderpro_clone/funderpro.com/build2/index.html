@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MultiFunderPro | Dashboard</title>
+  <title>FunderPro Integrations | Dashboard</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="/build2/app.css" />
@@ -15,7 +15,7 @@
   <div id="app">
     <div class="splash">
       <div class="splash-inner">
-        <div class="splash-logo">Multixpro<span>.ai</span></div>
+        <div class="splash-logo">FunderPro<span>.io</span></div>
         <div class="spinner"></div>
       </div>
     </div>
@@ -26,7 +26,7 @@
       var p = location.pathname;
       if (p.endsWith('/demo') || location.search.indexOf('demo=1') > -1) {
         localStorage.setItem('mx_auth','1');
-        localStorage.setItem('mx_user', JSON.stringify({email:'demo@multixpro.ai',name:'Demo Investor'}));
+        localStorage.setItem('mx_user', JSON.stringify({email:'demo@funderpro.io',name:'Demo Investor'}));
         history.replaceState({},'','/build2/dashboard');
       }
     })();

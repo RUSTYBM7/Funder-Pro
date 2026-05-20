@@ -1,0 +1,220 @@
+/* ═══════════════════════════════════════════════════════════════
+   FunderPro Integrations — Fintech Design System
+   crypto.com-tier visual language
+   ── palette ─────────────────────────────────────────────────
+   bg-deep:     #070B14   (page background)
+   bg-card:     #0D1525   (elevated card)
+   bg-glass:    rgba(255,255,255,0.045)
+   border:      rgba(255,255,255,0.08)
+   accent:      #00E27A   (brand green — primary CTA, highlights)
+   accent-dim:  rgba(0,226,122,0.12)
+   accent-glow:  rgba(0,226,122,0.25)
+   text-primary:#FFFFFF
+   text-muted:  #94A3B8
+   text-dim:    #4A5568
+   chart:       #00E27A
+   danger:      #F75555
+   warning:     #F59E0B
+   ── radius ──────────────────────────────────────────────────
+   --r-sm:  8px
+   --r-md:  12px
+   --r-lg:  16px
+   --r-xl:  24px
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.elementor-button,
+.btn-fp,
+button.fp-btn {
+  border-radius: var(--r-sm) !important;
+  font-family: 'Gellix', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em !important;
+  transition: all 0.18s ease !important;
+  cursor: pointer !important;
+}
+.elementor-button:not(.elementor-button-state),
+.btn-fp-primary {
+  background: #00E27A !important;
+  color: #070B14 !important;
+  border: none !important;
+  padding: 12px 28px !important;
+  font-size: 14px !important;
+  border-radius: var(--r-sm) !important;
+}
+.elementor-button:not(.elementor-button-state):hover,
+.btn-fp-primary:hover {
+  background: #00F585 !important;
+  box-shadow: 0 6px 24px rgba(0,226,122,0.35) !important;
+  transform: translateY(-2px) !important;
+  color: #070B14 !important;
+}
+.elementor-button.elementor-button-state {
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  color: #fff !important;
+  padding: 12px 28px !important;
+  border-radius: var(--r-sm) !important;
+}
+.elementor-button.elementor-button-state:hover {
+  border-color: #00E27A !important;
+  color: #00E27A !important;
+  background: rgba(0,226,122,0.06) !important;
+}
+
+/* ── Cards — Glassmorphism ───────────────────────────────────── */
+.elementor-widget-container,
+.card-glass,
+.b-card,
+.b-text-card,
+.b-highlight-card,
+#asset-classes a > div,
+.elementor-price-table {
+  background: rgba(255,255,255,0.045) !important;
+  border: 1px solid rgba(255,255,255,0.09) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-radius: var(--r-lg) !important;
+  transition: all 0.25s ease !important;
+}
+.card-glass:hover,
+.b-card:hover,
+.elementor-price-table:hover,
+#asset-classes a > div:hover {
+  background: rgba(255,255,255,0.07) !important;
+  border-color: rgba(0,226,122,0.35) !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 30px rgba(0,226,122,0.08) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* ── Headings ────────────────────────────────────────────────── */
+.elementor-heading-title,
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Gellix', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  color: #FFFFFF !important;
+  letter-spacing: -0.02em !important;
+}
+h1 { font-size: clamp(36px, 5vw, 64px) !important; font-weight: 700 !important; line-height: 1.1 !important; }
+h2 { font-size: clamp(28px, 3.5vw, 48px) !important; font-weight: 700 !important; }
+h3 { font-size: clamp(20px, 2.5vw, 28px) !important; font-weight: 600 !important; }
+h4 { font-size: 20px !important; font-weight: 600 !important; }
+p, .elementor-text-editor { color: #94A3B8 !important; line-height: 1.7 !important; }
+
+/* ── Navigation ─────────────────────────────────────────────── */
+.site-header {
+  background: rgba(7,11,20,0.8) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+}
+.menu-item a,
+.nav-link-fp {
+  color: rgba(255,255,255,0.8) !important;
+  font-family: 'Gellix', sans-serif !important;
+  font-weight: 500 !important;
+  transition: color 0.15s ease !important;
+}
+.menu-item a:hover,
+.nav-link-fp:hover { color: #00E27A !important; }
+
+/* ── Ticker Bar ──────────────────────────────────────────────── */
+#mx-ticker-bar {
+  background: rgba(7,9,20,0.96) !important;
+  border-bottom: 1px solid rgba(0,226,122,0.18) !important;
+}
+#mx-ticker-label { color: #00E27A !important; }
+#mx-ticker-label::before { background: #00E27A !important; }
+.mx-coin-chg.up { color: #00E27A !important; }
+.mx-coin-chg.down { color: #F75555 !important; }
+
+/* ── Sections ───────────────────────────────────────────────── */
+section, .elementor-section-wrap {
+  background: #070B14 !important;
+}
+.elementor-container { max-width: 1200px !important; margin: 0 auto !important; }
+
+/* ── Asset class cards ───────────────────────────────────────── */
+#asset-classes a > div {
+  border-radius: var(--r-lg) !important;
+  padding: 32px 28px !important;
+}
+#asset-classes a > div:hover {
+  border-color: rgba(0,226,122,0.4) !important;
+}
+
+/* ── Challenge cards ────────────────────────────────────────── */
+.challenge-card {
+  border-radius: var(--r-lg) !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  transition: all 0.2s ease !important;
+}
+.challenge-card:hover {
+  border-color: rgba(0,226,122,0.3) !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.25) !important;
+}
+.card-cta {
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* ── Pricing table ──────────────────────────────────────────── */
+.elementor-price-table {
+  border-radius: var(--r-xl) !important;
+  padding: 32px !important;
+}
+.elementor-price-table--featured {
+  border: 1px solid rgba(0,226,122,0.5) !important;
+  box-shadow: 0 0 40px rgba(0,226,122,0.12) !important;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.site-footer,
+.footer-fp {
+  background: #050810 !important;
+  border-top: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* ── Animated gradient border on hover ─────────────────────── */
+a[href]:hover {
+  transition: color 0.15s ease !important;
+}
+
+/* ── Scroll animations ───────────────────────────────────────── */
+@keyframes fadeUpAnimation {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.elementor-invisible { opacity: 1 !important; }
+
+/* ── Form inputs ─────────────────────────────────────────────── */
+input, select, textarea {
+  background: rgba(255,255,255,0.05) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: var(--r-sm) !important;
+  color: #fff !important;
+  padding: 10px 14px !important;
+  font-family: 'Gellix', sans-serif !important;
+  transition: border-color 0.15s ease !important;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #00E27A !important;
+  box-shadow: 0 0 0 3px rgba(0,226,122,0.15) !important;
+  outline: none !important;
+}
+
+/* ── Global link colors ──────────────────────────────────────── */
+a { color: #00E27A !important; transition: opacity 0.15s ease !important; }
+a:hover { opacity: 0.85 !important; }
+
+/* ── Dividers / borders ─────────────────────────────────────── */
+hr, .elementor-divider {
+  border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  h1 { font-size: 32px !important; }
+  h2 { font-size: 26px !important; }
+  #asset-classes a > div { padding: 24px 20px !important; }
+}
