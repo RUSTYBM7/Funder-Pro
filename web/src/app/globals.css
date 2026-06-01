@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #070B14;
+  --color-card: #0D1525;
+  --color-card-foreground: #ffffff;
+  --color-primary: #00E27A;
+  --color-primary-foreground: #070B14;
+  --color-secondary: #131C2E;
+  --color-secondary-foreground: #94A3B8;
+  --color-muted: #94A3B8;
+  --color-muted-foreground: #64748B;
+  --color-accent: #131C2E;
+  --color-accent-foreground: #94A3B8;
+  --color-destructive: #EF4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-input: rgba(255, 255, 255, 0.08);
+  --color-ring: #00E27A;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --font-sans: "DM Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-card-foreground);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: rgba(0, 226, 122, 0.3);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #070B14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.glass {
+  background: rgba(13, 21, 37, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.card-glass {
+  background: linear-gradient(135deg, rgba(13, 21, 37, 0.9) 0%, rgba(19, 28, 46, 0.6) 100%);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
